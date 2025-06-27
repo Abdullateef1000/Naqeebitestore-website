@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart - THE BLOOMS FRAGRANCE</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f7f6f3 0%, #ffe5ec 100%);
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 32px 24px;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #b48a78;
+            margin-bottom: 32px;
+            letter-spacing: 2px;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+        
+        .cart-list {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+        }
+        
+        .cart-list th,
+        .cart-list td {
+            padding: 12px 8px;
+            text-align: left;
+        }
+        
+        .cart-list th {
+            background: #ffe5ec;
+            color: #b48a78;
+            font-size: 1.1rem;
+        }
+        
+        .cart-list tr {
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-list img {
+            width: 60px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #ececec;
+        }
+        
+        .total-row td {
+            font-weight: 700;
+            color: #b48a78;
+            font-size: 1.1rem;
+        }
+        
+        .empty {
+            text-align: center;
+            color: #888;
+            font-size: 1.1rem;
+            margin: 40px 0;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 18px;
+            color: #b48a78;
+            text-decoration: underline;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: color 0.2s;
+        }
+        
+        .back-link:hover {
+            color: #ffb6b9;
+        }
+        
+        .checkout-btn {
+            display: block;
+            margin: 30px auto 0 auto;
+            background: linear-gradient(90deg, #b48a78 0%, #e7cfc2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 38px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(180, 138, 120, 0.08);
+        }
+        
+        .checkout-btn:hover {
+            background: linear-gradient(90deg, #ffb6b9 0%, #b48a78 100%);
+            box-shadow: 0 4px 16px #ffb6b9;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../../index.html" class="back-link">&larr; Back to Store</a>
+    <div class="container">
+        <h1>Your Cart</h1>
+        <div id="cart-content"></div>
+        <button class="checkout-btn" onclick="alert('Checkout coming soon!')">Checkout</button>
+    </div>
+    <script>
+        function renderCart() {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const cartContent = document.getElementById('cart-content');
+            if (cart.length === 0) {
+                cartContent.innerHTML = '<div class="empty">Your cart is empty.</div>';
+                return;
+            }
+            let total = 0;
+            let rows = cart.map(item => {
+                const priceNum = parseFloat(item.price.replace(/[^0-9.]/g, '')) || 0;
+                const itemTotal = priceNum * item.qty;
+                total += itemTotal;
+                return `
+                    <tr>
+                        <td><img src="${item.img}" alt="${item.name}"></td>
+                        <td>${item.name}</td>
+                        <td>${item.price}</td>
+                        <td>${item.qty}</td>
+                        <td>$${itemTotal.toFixed(2)}</td>
+                    </tr>
+                `;
+            }).join('');
+            cartContent.innerHTML = `
+                <table class="cart-list">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${rows}
+                        <tr class="total-row">
+                            <td colspan="4" style="text-align:right;">Grand Total:</td>
+                            <td>$${total.toFixed(2)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        }

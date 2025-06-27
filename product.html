@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details - THE BLOOMS FRAGRANCE</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <style>
+        /* ...existing code... */
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="cart" id="cart-btn">
+            <svg width="26" height="26" fill="none" viewBox="0 0 24 24">
+                <path fill="#b48a78"
+                    d="M7 20a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM7.16 16.26l.03.01.02.01c.23.09.47.14.72.14h8.16a2 2 0 0 0 1.97-1.68l1.38-8A2 2 0 0 0 18.46 4H6.21l-.31-1.65A2 2 0 0 0 4 2H2v2h1.21l2.7 14.36a2 2 0 0 0 1.25 1.44ZM6.21 6h12.25l-1.38 8H7.16L6.21 6Z" />
+            </svg>
+            <span class="cart-count" id="cart-count">0</span> Cart
+        </div>
+    </div>
+    <div class="container">
+        <img class="product-img" id="product-img" src="" alt="Product">
+        <div class="details">
+            <div class="product-name" id="product-name"></div>
+            <div class="product-price" id="product-price"></div>
+            <div class="product-desc" id="product-desc"></div>
+            <button class="add-cart-btn" id="add-to-cart-btn">Add to Cart</button>
+            <div class="added-message" id="added-message"></div>
+        </div>
+    </div>
+    <div class="cart-modal" id="cart-modal">
+        <button class="close-cart" onclick="toggleCart(false)">&times;</button>
+        <h2>Your Cart</h2>
+        <div id="cart-content"></div>
+    </div>
+    <script>
+        // Product data from query params
+        const params = new URLSearchParams(window.location.search);
+        const name = params.get('name');
+        const price = params.get('price');
+        const img = params.get('img');
+        const desc = params.get('desc') || "A wonderful fragrance from THE BLOOMS FRAGRANCE collection.";
+
+        document.getElementById('product-img').src = img;
+        document.getElementById('product-img').alt = name;
+        document.getElementById('product-name').textContent = name;
+        document.getElementById('product-price').textContent = price;
+        document.getElementById('product-desc').textContent = desc;
+
+        // Add to cart logic (localStorage)
+        document.getElementById('add-to-cart-btn').onclick = function() {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({
+                    name,
+                    price,
+                    img,
+                    qty: 1
+                });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showCart();
+            showAddedMessage();
+        };
+
+        function showAddedMessage() {
+            const msg = document.getElementById('added-message');
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const item = cart.find(item => item.name === name);
+            const priceNum = parseFloat(item.price.replace(/[^0-9.]/g, '')) || 0;
+            const total = priceNum * item.qty;
+            msg.textContent = `${item.name} × ${item.qty} = $${total.toFixed(2)}`;
+            msg.style.display = 'block';
+            setTimeout(() => {
+                msg.style.display = 'none';
+            }, 2000);
+        }
+
+        // Cart modal logic
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            document.getElementById('cart-count').textContent = cart.reduce((a, b) => a + b.qty, 0);
+        }
+
+        function renderCart() {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const cartContent = document.getElementById('cart-content');
+            if (cart.length === 0) {
+                cartContent.innerHTML = '<div class="empty">Your cart is empty.</div>';
+                return;
+            }
+            let total = 0;
+            let rows = cart.map(item => {
+                const priceNum = parseFloat(item.price.replace(/[^0-9.]/g, '')) || 0;
+                const itemTotal = priceNum * item.qty;
+                total += itemTotal;
+                return `
+                    <tr>
+                        <td><img src="${item.img}" alt="${item.name}"></td>
+                        <td>${item.name}</td>
+                        <td>${item.qty}</td>
+                        <td>$${itemTotal.toFixed(2)}</td>
+                    </tr>
+                `;
+            }).join('');
+            cartContent.innerHTML = `
+                <table class="cart-list">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${rows}
+                        <tr class="cart-total-row">
+                            <td colspan="3" style="text-align:right;">Grand Total:</td>
+                            <td>$${total.toFixed(2)}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function toggleCart(show) {
+            document.getElementById('cart-modal').style.display = show ? 'block' : 'none';
+            if (show) renderCart();
+        }
+
+        function showCart() {
+            toggleCart(true);
+        }
+        document.getElementById('cart-btn').onclick = function() {
+            showCart();
+        };
+        // Update cart count on load
+        updateCartCount();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>THE BLOOMS FRAGRANCE</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f7f6f3 0%, #ffe5ec 100%);
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .top-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            background: transparent;
+            padding: 10px 30px 0 30px;
+            font-size: 1rem;
+        }
+        
+        .top-bar .cart {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #b48a78;
+            font-weight: 600;
+            position: relative;
+            background: #fff;
+            padding: 8px 18px;
+            border-radius: 24px;
+            box-shadow: 0 2px 12px rgba(180, 138, 120, 0.10);
+        }
+        
+        .cart-count {
+            background: #b48a78;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -10px;
+            right: -18px;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(180, 138, 120, 0.15);
+        }
+        
+        header {
+            background: linear-gradient(90deg, #ffb6b9 0%, #b48a78 50%, #e7cfc2 100%);
+            box-shadow: 0 4px 32px rgba(180, 138, 120, 0.10);
+            padding: 0 0 38px 0;
+            border-bottom-left-radius: 32px;
+            border-bottom-right-radius: 32px;
+            position: relative;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 18px 30px 0 30px;
+        }
+        
+        .brand {
+            font-size: 2.3rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 16px #b48a78, 0 2px 8px rgba(180, 138, 120, 0.08);
+            background: linear-gradient(90deg, #b48a78 0%, #ffb6b9 100%);
+            padding: 12px 36px;
+            border-radius: 22px;
+            transition: box-shadow 0.3s, background 0.3s;
+            box-shadow: 0 4px 24px rgba(180, 138, 120, 0.10);
+            cursor: pointer;
+        }
+        
+        .brand:hover {
+            background: linear-gradient(90deg, #fff 0%, #b48a78 100%);
+            color: #b48a78;
+            box-shadow: 0 8px 32px #ffb6b9, 0 2px 8px rgba(180, 138, 120, 0.18);
+            animation: boom 0.4s;
+        }
+        
+        @keyframes boom {
+            0% {
+                box-shadow: 0 4px 24px #b48a78;
+            }
+            60% {
+                box-shadow: 0 0 60px #ffb6b9, 0 2px 8px #b48a78;
+            }
+            100% {
+                box-shadow: 0 8px 32px #ffb6b9, 0 2px 8px #b48a78;
+            }
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li {
+            position: relative;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.2s, background 0.2s;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        
+        nav ul li a:hover {
+            color: #b48a78;
+            background: #fff;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: #fff;
+            min-width: 140px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+            z-index: 1;
+            top: 38px;
+            left: 0;
+        }
+        
+        .dropdown-content a {
+            display: block;
+            padding: 10px 18px;
+            color: #2d2d2d;
+            font-size: 1rem;
+            border-radius: 0;
+        }
+        
+        .dropdown-content a:hover {
+            background: #f7f6f3;
+            color: #b48a78;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .shop-now-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 38px;
+            margin-bottom: 0;
+            padding-right: 30px;
+        }
+        
+        .shop-now-btn {
+            background: linear-gradient(90deg, #b48a78 0%, #ffb6b9 100%);
+            color: #fff;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 30px;
+            padding: 16px 48px;
+            box-shadow: 0 4px 24px rgba(180, 138, 120, 0.10);
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+            letter-spacing: 1px;
+        }
+        
+        .shop-now-btn:hover {
+            background: linear-gradient(90deg, #ffb6b9 0%, #b48a78 100%);
+            color: #b48a78;
+            box-shadow: 0 8px 32px #ffb6b9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #b48a78;
+            margin-bottom: 32px;
+            letter-spacing: 2px;
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-shadow: 0 2px 8px rgba(180, 138, 120, 0.08);
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 32px;
+        }
+        
+        .product-card {
+            background: #f9f9f9;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            padding: 18px;
+            text-align: center;
+            transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 6px 24px #ffb6b9, 0 2px 8px #b48a78;
+            background: linear-gradient(120deg, #ffe5ec 0%, #fff 100%);
+        }
+        
+        .product-img {
+            width: 120px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+            background: #ececec;
+        }
+        
+        .product-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .product-price {
+            color: #b48a78;
+            font-size: 1rem;
+            margin-bottom: 14px;
+            font-weight: 600;
+        }
+        
+        .add-cart-btn {
+            background: linear-gradient(90deg, #b48a78 0%, #e7cfc2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 22px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(180, 138, 120, 0.08);
+            margin-top: auto;
+        }
+        
+        .add-cart-btn:hover {
+            background: linear-gradient(90deg, #ffb6b9 0%, #b48a78 100%);
+            box-shadow: 0 4px 16px #ffb6b9;
+        }
+        
+        .footer-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            background: #fff;
+            border-radius: 18px 18px 0 0;
+            box-shadow: 0 -2px 12px rgba(180, 138, 120, 0.08);
+            margin: 40px auto 0 auto;
+            padding: 18px 12px 14px 12px;
+            max-width: 700px;
+            font-size: 1rem;
+        }
+        
+        .footer-bar a {
+            color: #b48a78;
+            text-decoration: underline;
+            font-weight: 600;
+            transition: color 0.2s;
+            margin: 0 6px;
+        }
+        
+        .footer-bar a:hover {
+            color: #ffb6b9;
+        }
+        
+        .footer-bar .whatsapp-footer {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #25d366;
+            font-weight: 700;
+            font-size: 1.08rem;
+        }
+        
+        .footer-bar .whatsapp-footer a {
+            color: #25d366;
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .footer-bar .whatsapp-footer a:hover {
+            text-decoration: underline;
+            color: #128c7e;
+        }
+        
+        .footer-bar svg {
+            vertical-align: middle;
+        }
+        
+        @media (max-width: 1200px) {
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 700px) {
+            .footer-bar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 16px 4px 10px 4px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 8px;
+            }
+            .products {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 12px 8px 0 8px;
+            }
+            .brand {
+                font-size: 1.3rem;
+            }
+            .shop-now-bar {
+                padding-right: 0;
+                margin-top: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="cart" id="cart-btn">
+            <svg width="26" height="26" fill="none" viewBox="0 0 24 24">
+                <path fill="#b48a78"
+                    d="M7 20a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM7.16 16.26l.03.01.02.01c.23.09.47.14.72.14h8.16a2 2 0 0 0 1.97-1.68l1.38-8A2 2 0 0 0 18.46 4H6.21l-.31-1.65A2 2 0 0 0 4 2H2v2h1.21l2.7 14.36a2 2 0 0 0 1.25 1.44ZM6.21 6h12.25l-1.38 8H7.16L6.21 6Z" />
+            </svg>
+            <span class="cart-count" id="cart-count">0</span> Cart
+        </div>
+        <div style="margin-left: 24px;">
+            <a href="login.html" id="login-link" style="color:#b48a78;font-weight:600;text-decoration:none;margin-right:18px;">Login</a>
+            <a href="signup.html" id="signup-link" style="color:#b48a78;font-weight:600;text-decoration:none;">Sign Up</a>
+        </div>
+    </div>
+    <header>
+        <div class="navbar">
+            <div class="brand" tabindex="0">THE BLOOMS FRAGRANCE</div>
+            <nav>
+                <ul>
+                    <li class="dropdown">
+                        <a href="#">Store &#9662;</a>
+                        <div class="dropdown-content">
+                            <a href="#">All Fragrances</a>
+                            <a href="#">Best Sellers</a>
+                            <a href="#">New Arrivals</a>
+                            <a href="#">Gift Sets</a>
+                        </div>
+                    </li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="shop-now-bar">
+            <button class="shop-now-btn" onclick="document.getElementById('fragrance-products').scrollIntoView({behavior: 'smooth'})">
+                Shop Now
+            </button>
+        </div>
+    </header>
+    <div class="container" id="fragrance-products">
+        <h1>Fragrance Collection</h1>
+        <div class="products">
+            <!-- 15 Products, update image src as needed -->
+            <div class="product-card" onclick="viewProduct('Amber Essence', '$49.99', 'assess/amber essence.webp')">
+                <img class="product-img" src="assess/amber essence.webp" alt="Amber Essence">
+                <div class="product-name">Amber Essence</div>
+                <div class="product-price">$49.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Amber Essence', '$49.99', 'assess/amber essence.webp')">Add to Cart</button>
+            </div>
+            <div class="product-card" onclick="viewProduct('Citrus Bloom', '$39.99', 'assess/citrus boom.jfif')">
+                <img class="product-img" src="assess/citrus boom.jfif" alt="Citrus Bloom">
+                <div class="product-name">Citrus Bloom</div>
+                <div class="product-price">$39.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Citrus Bloom', '$39.99', 'assess/citrus boom.jfif')">Add to Cart</button>
+            </div>
+            <div class="product-card" onclick="viewProduct('Velvet Oud', '$59.99', 'assess/velvet oud.webp')">
+                <img class="product-img" src="assess/velvet oud.webp" alt="Velvet Oud">
+                <div class="product-name">Velvet Oud</div>
+                <div class="product-price">$59.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Velvet Oud', '$59.99', 'assess/velvet oud.webp')">Add to Cart</button>
+            </div>
+            <div class="product-card" onclick="viewProduct('Rose Petal', '$44.99', 'assess/rose petal.webp')">
+                <img class="product-img" src="assess/rose petal.webp" alt="Rose Petal">
+                <div class="product-name">Rose Petal</div>
+                <div class="product-price">$44.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Rose Petal', '$44.99', 'assess/rose petal.webp')">Add to Cart</button>
+            </div>
+            <div class="product-card" onclick="viewProduct('Midnight Musk', '$54.99', 'assess/midnight musk.webp')">
+                <img class="product-img" src="assess/midnight musk.webp" alt="Midnight Musk">
+                <div class="product-name">Midnight Musk</div>
+                <div class="product-price">$54.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Midnight Musk', '$54.99', 'assess/midnight musk.webp')">Add to Cart</button>
+            </div>
+            <div class="product-card" onclick="viewProduct('Jasmine Dream', '$42.99', 'assess/jasmine dream.webp')">
+                <img class="product-img" src="assess/jasmine dream.webp" alt="Jasmine Dream">
+                <div class="product-name">Jasmine Dream</div>
+                <div class="product-price">$42.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Jasmine Dream', '$42.99', 'assess/jasmine dream.webp')">Add to Cart</button>
+            </div>
+            <div class="product-card" onclick="viewProduct('Ocean Mist', '$37.99', 'assess/ocean mist.webp')">
+                <img class="product-img" src="assess/ocean mist.webp" alt="Ocean Mist">
+                <div class="product-name">Ocean Mist</div>
+                <div class="product-price">$37.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Ocean Mist', '$37.99', 'assess/ocean mist.webp')">Add to Cart</button>
+            </div>
+            <div class="product-card" onclick="viewProduct('Golden Sandal', '$51.99', 'assess/golden sandal.webp')">
+                <img class="product-img" src="assess/golden sandal.webp" alt="Golden Sandal">
+                <div class="product-name">Golden Sandal</div>
+                <div class="product-price">$51.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Golden Sandal', '$51.99', 'assess/golden sandal.webp')">Add to Cart</button>
+            </div>
+            <div class="product-card" onclick="viewProduct('Peach Blossom', '$46.99', 'assess/peace blossom.jfif')">
+                <img class="product-img" src="assess/peace blossom.jfif" alt="Peach Blossom">
+                <div class="product-name">Peach Blossom</div>
+                <div class="product-price">$46.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Peach Blossom', '$46.99', 'assess/peace blossom.jfif')">Add to Cart</button>
+            </div>
+            <div class="product-card" onclick="viewProduct('Cedar Woods', '$48.99', 'assess/cedar woods.jfif')">
+                <img class="product-img" src="assess/cedar woods.jfif" alt="Cedar Woods">
+                <div class="product-name">Cedar Woods</div>
+                <div class="product-price">$48.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Cedar Woods', '$48.99', 'assess/cedar woods.jfif')">Add to Cart</button>
+            </div>
+            <div class="product-card" onclick="viewProduct('Vanilla Sky', '$41.99', 'assess/vanilla sky.webp')">
+                <img class="product-img" src="assess/vanilla sky.webp" alt="Vanilla Sky">
+                <div class="product-name">Vanilla Sky</div>
+                <div class="product-price">$41.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Vanilla Sky', '$41.99', 'assess/vanilla sky.webp')">Add to Cart</button>
+            </div>
+            <div class="product-card" onclick="viewProduct('Spice Route', '$53.99', 'assess/spice route.webp')">
+                <img class="product-img" src="assess/spice route.webp" alt="Spice Route">
+                <div class="product-name">Spice Route</div>
+                <div class="product-price">$53.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Spice Route', '$53.99', 'assess/spice route.webp')">Add to Cart</button>
+            </div>
+            <div class="product-card" onclick="viewProduct('Fresh Linen', '$36.99', 'assess/fresh linen.webp')">
+                <img class="product-img" src="assess/fresh linen.webp" alt="Fresh Linen">
+                <div class="product-name">Fresh Linen</div>
+                <div class="product-price">$36.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Fresh Linen', '$36.99', 'assess/fresh linen.webp')">Add to Cart</button>
+            </div>
+            <div class="product-card" onclick="viewProduct('Wild Fig', '$45.99', 'assess/wild fig.webp')">
+                <img class="product-img" src="assess/wild fig.webp" alt="Wild Fig">
+                <div class="product-name">Wild Fig</div>
+                <div class="product-price">$45.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Wild Fig', '$45.99', 'assess/wild fig.webp')">Add to Cart</button>
+            </div>
+            <div class="product-card" onclick="viewProduct('Musk Noir', '$57.99', 'assess/musk noir.webp')">
+                <img class="product-img" src="assess/musk noir.webp" alt="Musk Noir">
+                <div class="product-name">Musk Noir</div>
+                <div class="product-price">$57.99</div>
+                <button class="add-cart-btn" onclick="event.stopPropagation(); addToCart('Musk Noir', '$57.99', 'assess/musk noir.webp')">Add to Cart</button>
+            </div>
+        </div>
+        <div id="added-message" style="display:none;color:#25d366;font-weight:600;margin-top:18px;font-size:1.1rem;text-align:center;"></div>
+    </div>
+    <div class="footer-bar">
+        <div class="whatsapp-footer">
+            <svg width="22" height="22" fill="none" viewBox="0 0 24 24">
+                <path fill="#25d366"
+                    d="M12.004 2.003a9.99 9.99 0 0 0-8.47 15.37l-1.13 4.14a1 1 0 0 0 1.22 1.22l4.14-1.13A9.99 9.99 0 1 0 12.004 2.003Zm0 18.01a8.01 8.01 0 0 1-4.09-1.13l-.29-.17-2.46.67.67-2.46-.17-.29A8.01 8.01 0 1 1 20.014 12c0 4.42-3.59 8.01-8.01 8.01Zm4.44-6.36c-.24-.12-1.41-.7-1.63-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.01-.37-1.93-1.18-.71-.63-1.19-1.41-1.33-1.65-.14-.24-.01-.36.11-.48.12-.12.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.41-.54-.42-.14-.01-.3-.01-.46-.01-.16 0-.42.06-.64.3-.22.24-.86.84-.86 2.04 0 1.2.88 2.36 1 2.52.12.16 1.73 2.65 4.2 3.61.59.2 1.05.32 1.41.41.59.15 1.13.13 1.56.08.48-.06 1.41-.58 1.61-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z" />
+            </svg>
+            <a href="https://wa.me/2347042992529" target="_blank">WhatsApp</a>
+        </div>
+        <a href="privacy.html" target="_blank">Privacy Policy</a>
+        <a href="terms.html" target="_blank">Terms of Service</a>
+    </div>
+    <script>
+        // Cart logic using localStorage
+        function addToCart(name, price, img) {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({
+                    name,
+                    price,
+                    img,
+                    qty: 1
+                });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showAddedMessage(name, price, existing ? existing.qty : 1);
+        }
+
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            document.getElementById('cart-count').textContent = cart.reduce((a, b) => a + b.qty, 0);
+        }
+
+        function showAddedMessage(name, price, qty) {
+            const msg = document.getElementById('added-message');
+            const priceNum = parseFloat(price.replace(/[^0-9.]/g, '')) || 0;
+            const total = priceNum * qty;
+            msg.textContent = `${name} × ${qty} = $${total.toFixed(2)}`;
+            msg.style.display = 'block';
+            setTimeout(() => {
+                msg.style.display = 'none';
+            }, 2000);
+        }
+
+        // Update cart count on load
+        updateCartCount();
+
+        // Make login and signup links go to fragrance1.html
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('login-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = "fragrance1.html";
+            });
+            document.getElementById('signup-link').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.location.href = "fragrance1.html";
+            });
+        });
+
+        // View product: redirect to product.html with product details in query string
+        function viewProduct(name, price, img) {
+            const params = new URLSearchParams({
+                name: name,
+                price: price,
+                img: img
+            });
+            window.location.href = `product.html?${params.toString()}`;
+        }
+    </script>
+</body>
+
+</html>

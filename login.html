@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login - THE BLOOMS FRAGRANCE</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f7f6f3 0%, #ffe5ec 100%);
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .brand-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #b48a78;
+            letter-spacing: 2px;
+            margin-top: 48px;
+            margin-bottom: 32px;
+            text-shadow: 0 2px 16px #b48a78, 0 2px 8px rgba(180, 138, 120, 0.08);
+        }
+        
+        .login-container {
+            max-width: 370px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            padding: 38px 32px 32px 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .login-step-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #b48a78;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+        }
+        
+        .login-form-step {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        
+        .login-form-step label {
+            font-weight: 600;
+            color: #b48a78;
+            margin-bottom: 4px;
+        }
+        
+        .login-form-step input {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #e7cfc2;
+            font-size: 1rem;
+            outline: none;
+            margin-bottom: 2px;
+        }
+        
+        .login-form-step input:focus {
+            border-color: #b48a78;
+        }
+        
+        .login-btn {
+            background: linear-gradient(90deg, #b48a78 0%, #e7cfc2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+        
+        .login-btn:hover {
+            background: linear-gradient(90deg, #ffb6b9 0%, #b48a78 100%);
+        }
+        
+        .login-links {
+            margin-top: 18px;
+            text-align: center;
+        }
+        
+        .login-links a {
+            color: #b48a78;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 8px;
+            transition: color 0.2s;
+        }
+        
+        .login-links a:hover {
+            color: #ffb6b9;
+            text-decoration: none;
+        }
+        
+        .error-message {
+            color: #ff4d4f;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            text-align: center;
+            display: none;
+        }
+        
+        @media (max-width: 500px) {
+            .login-container {
+                padding: 18px 6vw 18px 6vw;
+            }
+            .brand-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="brand-title">Blooms Fragrance</div>
+    <div class="login-container">
+        <div class="login-step-title">Login to your account</div>
+        <form class="login-form-step" id="loginForm" autocomplete="off">
+            <div class="error-message" id="errorMsg"></div>
+            <div>
+                <label for="username">Username or Email</label>
+            </div>
+            <div>
+                <input type="text" id="username" name="username" required autocomplete="username" placeholder="Enter username or email">
+            </div>
+            <div>
+                <label for="password">Password</label>
+            </div>
+            <div>
+                <input type="password" id="password" name="password" required autocomplete="current-password" placeholder="Enter password">
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        <div class="login-links">
+            <a href="#">Forgot Password?</a>
+            <a href="signup.html">Create Account</a>
+        </div>
+    </div>
+    <script>
+        // Allow any Snapchat email and any password, redirect to fragrance1.html
+        document.getElementById('loginForm').onsubmit = function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorMsg = document.getElementById('errorMsg');
+            errorMsg.style.display = "none";
+            // Snapchat emails usually end with @snapchat.com or are created from Snapchat
+            // We'll just check if it's an email format for demo
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!username) {
+                errorMsg.textContent = "Please enter your username or email!";
+                errorMsg.style.display = "block";
+                return;
+            }
+            if (!emailPattern.test(username)) {
+                errorMsg.textContent = "Please enter a valid email!";
+                errorMsg.style.display = "block";
+                return;
+            }
+            if (!password) {
+                errorMsg.textContent = "Please enter your password!";
+                errorMsg.style.display = "block";
+                return;
+            }
+            // Any email and password is accepted
+            window.location.href = "fragrance1.html";
+        }
+    </script>
+</body>
+
+</html>
